@@ -1,0 +1,9 @@
+version: '3.7'
+
+services:
+  rabbit_management_user:
+    image: rabbitmq:3-management
+    hostname: my-rabbit-management
+    ports:
+      - 5672:5672
+      - 15672:15672

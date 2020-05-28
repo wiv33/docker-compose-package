@@ -1,0 +1,8 @@
+version: "3.0"
+
+services:
+  mongo_user:
+    image: mongo
+    hostname: my-mongo
+    ports:
+      - 27017:27017
