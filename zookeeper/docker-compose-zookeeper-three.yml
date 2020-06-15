@@ -3,6 +3,7 @@ version: '3.7'
 networks:
   ps-zoo:
     driver: bridge
+    external: true
 
 services:
   zoo1:
