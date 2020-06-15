@@ -14,5 +14,5 @@ services:
       KAFKA_LOG_ROLL_MS: 10000
       KAFKA_LOG_CLEANUP_PLOICY: compact
 #      KAFKA_AUTO_CREATE_TOPICS_ENABLED: 'false'
-    volumes:
+    networks:
       - ps-zoo
