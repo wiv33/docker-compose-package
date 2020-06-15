@@ -1,5 +1,9 @@
 version: '3.7'
 
+networks:
+  ps-zoo:
+    driver: bridge
+
 services:
   zoo1:
     image: zookeeper
@@ -10,6 +14,10 @@ services:
     environment:
       ZOO_MY_ID: 1
       ZOO_SERVERS: server.1=0.0.0.0:2888:3888;2181 server.2=zoo2:2888:3888;2181 server.3=zoo3:2888:3888;2181
+    volumes:
+      - /var/lib/zookeeper:/var/lib/zookeeper
+    networks:
+      - ps-zoo
 
   zoo2:
     image: zookeeper
@@ -20,6 +28,10 @@ services:
     environment:
       ZOO_MY_ID: 2
       ZOO_SERVERS: server.1=zoo1:2888:3888;2181 server.2=0.0.0.0:2888:3888;2181 server.3=zoo3:2888:3888;2181
+    volumes:
+      - /var/lib/zookeeper:/var/lib/zookeeper
+    networks:
+      - ps-zoo
 
   zoo3:
     image: zookeeper
@@ -30,3 +42,7 @@ services:
     environment:
       ZOO_MY_ID: 3
       ZOO_SERVERS: server.1=zoo1:2888:3888;2181 server.2=zoo2:2888:3888;2181 server.3=0.0.0.0:2888:3888;2181
+    volumes:
+      - /var/lib/zookeeper:/var/lib/zookeeper
+    networks:
+      - ps-zoo
