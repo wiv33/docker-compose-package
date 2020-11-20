@@ -11,7 +11,7 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ADVERTISED_HOST_NAME: ps_kafka_one
-      KAFKA_HEAP_OPTS: "-Xmx128M -Xms128M"
+      KAFKA_HEAP_OPTS: "-Xmx256M -Xms256M"
       HOSTNAME_COMMAND: "docker info | grep ^Name: | cut -d' ' -f 2" # Normal instances
       KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181,zoo3:2181
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
@@ -35,7 +35,7 @@ services:
     environment:
       KAFKA_BROKER_ID: 2
       KAFKA_ADVERTISED_HOST_NAME: ps_kafka_two
-      KAFKA_HEAP_OPTS: "-Xmx128M -Xms128M"
+      KAFKA_HEAP_OPTS: "-Xmx256M -Xms256M"
       HOSTNAME_COMMAND: "docker info | grep ^Name: | cut -d' ' -f 2" # Normal instances
       KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181,zoo3:2181
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
@@ -58,7 +58,7 @@ services:
     environment:
       KAFKA_BROKER_ID: 3
       KAFKA_ADVERTISED_HOST_NAME: ps_kafka_three
-      KAFKA_HEAP_OPTS: "-Xmx128M -Xms128M"
+      KAFKA_HEAP_OPTS: "-Xmx256M -Xms256M"
       HOSTNAME_COMMAND: "docker info | grep ^Name: | cut -d' ' -f 2" # Normal instances
       KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181,zoo3:2181
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
