@@ -4,7 +4,6 @@ services:
 
   ps_kafka_one:
     image: wurstmeister/kafka
-    container_name: ps_kafka_one
     hostname: ps_kafka_one
     ports:
       - 9092:9092
@@ -29,7 +28,6 @@ services:
 
   ps_kafka_two:
     image: wurstmeister/kafka
-    container_name: ps_kafka_two
     hostname: ps_kafka_two
     ports:
       - 9093:9093
@@ -54,7 +52,6 @@ services:
 
   ps_kafka_three:
     image: wurstmeister/kafka
-    container_name: ps_kafka_three
     hostname: ps_kafka_three
     ports:
       - 9094:9094
