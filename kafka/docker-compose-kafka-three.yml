@@ -25,9 +25,9 @@ services:
     #      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "1"
     #      KAFKA_AUTO_CREATE_TOPICS_ENABLED: 'false'
     extra_hosts:
-      - "ps_kafka_one:127.0.0.1"
-      - 'ps_kafka_two:127.0.0.1'
-      - 'ps_kafka_three:127.0.0.1'
+      - "ps_kafka_one:0.0.0.0"
+      - 'ps_kafka_two:0.0.0.0'
+      - 'ps_kafka_three:0.0.0.0'
     networks:
       - ps-zoo
 
@@ -36,14 +36,14 @@ services:
     container_name: ps_kafka_two
     hostname: ps_kafka_two
     ports:
-      - 9093:9093
+      - 9093:9092
     environment:
       KAFKA_BROKER_ID: 2
       KAFKA_ADVERTISED_HOST_NAME: ps_kafka_two
       HOSTNAME_COMMAND: "docker info | grep ^Name: | cut -d' ' -f 2" # Normal instances
       KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2182,zoo3:2183
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://ps_kafka_two:9093
-      KAFKA_LISTENERS: PLAINTEXT://:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://ps_kafka_two:9092
+      KAFKA_LISTENERS: PLAINTEXT://:9092
       KAFKA_LOG_ROLL_MS: 10000
       KAFKA_CREATE_TOPICS: "test-java:1:1,test-python:1:1"
     #      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
@@ -54,9 +54,9 @@ services:
     #      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "1"
     #      KAFKA_AUTO_CREATE_TOPICS_ENABLED: 'false'
     extra_hosts:
-      - "ps_kafka_one:127.0.0.1"
-      - 'ps_kafka_two:127.0.0.1'
-      - 'ps_kafka_three:127.0.0.1'
+      - "ps_kafka_one:0.0.0.0"
+      - 'ps_kafka_two:0.0.0.0'
+      - 'ps_kafka_three:0.0.0.0'
     networks:
       - ps-zoo
 
@@ -65,14 +65,14 @@ services:
     container_name: ps_kafka_three
     hostname: ps_kafka_three
     ports:
-      - 9094:9094
+      - 9094:9092
     environment:
       KAFKA_BROKER_ID: 3
       KAFKA_ADVERTISED_HOST_NAME: ps_kafka_three
       HOSTNAME_COMMAND: "docker info | grep ^Name: | cut -d' ' -f 2" # Normal instances
       KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2182,zoo3:2183
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://ps_kafka_three:9094
-      KAFKA_LISTENERS: PLAINTEXT://:9094
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://ps_kafka_three:9092
+      KAFKA_LISTENERS: PLAINTEXT://:9092
       KAFKA_LOG_ROLL_MS: 10000
       KAFKA_CREATE_TOPICS: "test-java:1:1,test-python:1:1"
     #      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
@@ -81,9 +81,9 @@ services:
     #      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "1"
     #      KAFKA_AUTO_CREATE_TOPICS_ENABLED: 'false'
     extra_hosts:
-      - "ps_kafka_one:127.0.0.1"
-      - 'ps_kafka_two:127.0.0.1'
-      - 'ps_kafka_three:127.0.0.1'
+      - "ps_kafka_one:0.0.0.0"
+      - 'ps_kafka_two:0.0.0.0'
+      - 'ps_kafka_three:0.0.0.0'
     networks:
       - ps-zoo
 
