@@ -9,7 +9,7 @@ services:
     ports:
     - 9092:9092
     environment:
-      KAFKA_BROKER_ID: 1004
+      KAFKA_BROKER_ID: 12
       HOSTNAME_COMMAND: "docker info | grep ^Name: | cut -d' ' -f 2" # Normal instances
       KAFKA_ADVERTISED_HOST_NAME: localhost
       KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2182,zoo3:2183
