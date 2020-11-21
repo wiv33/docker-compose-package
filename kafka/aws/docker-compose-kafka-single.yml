@@ -8,7 +8,7 @@ services:
     image: wurstmeister/kafka
 #    hostname: localhost
     ports:
-    - 9092:9092
+      - 9092:9092
     environment:
       KAFKA_BROKER_ID: 12
       DOCKER_HOST: ec2-54-180-105-76.ap-northeast-2.compute.amazonaws.com
