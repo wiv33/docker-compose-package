@@ -18,9 +18,9 @@ services:
     volumes:
       - /var/lib/zookeeper:/var/lib/zookeeper
     extra_hosts:
-      - "zoo1:0.0.0.0"
-      - "zoo2:3.35.209.187"
-      - "zoo3:3.35.209.187"
+      - "zoo1:127.0.0.1"
+      - "zoo2:127.0.0.1"
+      - "zoo3:127.0.0.1"
     networks:
       - ps-zoo
 
@@ -36,9 +36,9 @@ services:
     volumes:
       - /var/lib/zookeeper:/var/lib/zookeeper
     extra_hosts:
-      - "zoo1:3.35.209.187"
-      - "zoo2:0.0.0.0"
-      - "zoo3:3.35.209.187"
+      - "zoo1:127.0.0.1"
+      - "zoo2:127.0.0.1"
+      - "zoo3:127.0.0.1"
     networks:
       - ps-zoo
 
@@ -54,8 +54,8 @@ services:
     volumes:
       - /var/lib/zookeeper:/var/lib/zookeeper
     extra_hosts:
-      - "zoo1:3.35.209.187"
-      - "zoo2:3.35.209.187"
-      - "zoo3:0.0.0.0"
+      - "zoo1:127.0.0.1"
+      - "zoo2:127.0.0.1"
+      - "zoo3:127.0.0.1"
     networks:
       - ps-zoo
