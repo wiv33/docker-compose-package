@@ -25,7 +25,6 @@ services:
       - "zoo1:3.35.209.187"
       - "zoo2:3.35.209.187"
       - "zoo3:3.35.209.187"
-      - _{HOSTNAME_COMMAND}:54.180.105.76
     networks:
       - ps-zoo
 
