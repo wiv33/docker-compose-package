@@ -6,7 +6,7 @@ services:
 
   ps_kafka_scale:
     image: wurstmeister/kafka
-    hostname: localhost
+#    hostname: localhost
     ports:
     - 9092:9092
     environment:
