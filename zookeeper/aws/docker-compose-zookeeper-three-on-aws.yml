@@ -19,10 +19,6 @@ services:
       ZOO_SERVERS: server.1=0.0.0.0:2888:3888;2181 server.2=zoo2:2888:3888;2182 server.3=zoo3:2888:3888;2183
     volumes:
       - /var/lib/zookeeper:/var/lib/zookeeper
-    extra_hosts:
-      - "zoo1:3.35.209.187"
-      - "zoo2:3.35.209.187"
-      - "zoo3:3.35.209.187"
     networks:
       - ps-zoo
 
@@ -39,10 +35,6 @@ services:
       ZOO_SERVERS: server.1=zoo1:2888:3888;2181 server.2=0.0.0.0:2888:3888;2182 server.3=zoo3:2888:3888;2183
     volumes:
       - /var/lib/zookeeper:/var/lib/zookeeper
-    extra_hosts:
-      - "zoo1:3.35.209.187"
-      - "zoo2:3.35.209.187"
-      - "zoo3:3.35.209.187"
     networks:
       - ps-zoo
 
@@ -59,9 +51,5 @@ services:
       ZOO_SERVERS: server.1=zoo1:2888:3888;2181 server.2=zoo2:2888:3888;2182 server.3=0.0.0.0:2888:3888;2183
     volumes:
       - /var/lib/zookeeper:/var/lib/zookeeper
-    extra_hosts:
-      - "zoo1:3.35.209.187"
-      - "zoo2:3.35.209.187"
-      - "zoo3:3.35.209.187"
     networks:
       - ps-zoo
