@@ -1,5 +1,3 @@
-# https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
-
 version: '2.2'
 services:
   es01:
@@ -22,6 +20,7 @@ services:
       - 9200:9200
     networks:
       - elastic
+
   es02:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
     container_name: es02
@@ -38,8 +37,11 @@ services:
         hard: -1
     volumes:
       - data02:/usr/share/elasticsearch/data
+    ports:
+      - 9201:9201
     networks:
       - elastic
+
   es03:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
     container_name: es03
@@ -56,6 +58,19 @@ services:
         hard: -1
     volumes:
       - data03:/usr/share/elasticsearch/data
+    ports:
+      - 9202:9202
+    networks:
+      - elastic
+
+  kib01:
+    image: docker.elastic.co/kibana/kibana:7.10.1
+    container_name: kib01
+    ports:
+      - 5601:5601
+    environment:
+      ELASTICSEARCH_URL: http://es01:9200
+      ELASTICSEARCH_HOSTS: http://es01:9200
     networks:
       - elastic
 
