@@ -12,15 +12,15 @@
 #   config.string: "input { generator {} } filter { sleep { time => 1 } } output { stdout { codec => dots } }"
 - pipeline.id: java_logback
   queue.type: persisted
-  path.config: "../config/logstash.conf"
+  path.config: "./pipeline/logstash.conf"
 
 - pipeline.id: java_fluent
   queue.type: persisted
-  path.config: "../config/*fluent.conf"
+  path.config: "./pipeline/*fluent.conf"
 
 - pipeline.id: filebeat
   queue.type: persisted
-  path.config: "../config/*filebeat.conf"
+  path.config: "./pipeline/*filebeat.conf"
 #
 # Available options:
 #
