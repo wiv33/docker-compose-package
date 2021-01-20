@@ -1,0 +1,18 @@
+version: '3.7'
+
+
+services:
+  zeppelin:
+    image: apache/zeppelin:0.8.1
+
+    environment:
+      ZEPPELIN_NOTEBOOK_DIR: /notebook
+      ZEPPELIN_LOG_DIR: /logs
+
+    volumes:
+      - $PWD/logs:/logs
+      - $PWD/notebook:/notebook
+
+    ports:
+      - 4040:4040
+      - 8080:8080

@@ -77,38 +77,6 @@ services:
     networks:
       - elastic
 
-  logstash:
-    container_name: logstash
-    build:
-      context: logstash/
-      args:
-        ELK_VERSION: $ELK_VERSION
-    environment:
-      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
-    volumes:
-      - type: bind
-        source: ./logstash/config/logstash.yml
-        target: /usr/share/logstash/config/logstash.yml
-        read_only: true
-      - type: bind
-        source: ./logstash/pipeline
-        target: /usr/share/logstash/pipeline
-        read_only: true
-      - type: bind
-        source: ./logstash/config/pipelines.yml
-        target: /usr/share/logstash/config/pipelines.yml
-        read_only: true
-    ports:
-      - 5044:5044  # beat
-      - 5000-5012  # logback, fluent, other ...
-      - 9600-9700  # default ports
-    depends_on:
-      - es01
-      - es02
-      - es03
-    networks:
-      - elastic
-
 volumes:
   data01:
     driver: local
