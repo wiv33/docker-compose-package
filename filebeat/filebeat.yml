@@ -1,0 +1,105 @@
+filebeat.inputs:
+  - type: log
+
+    # Change to true to enable this input configuration.
+    enabled: true
+
+    # Paths that should be crawled and fetched. Glob based paths.
+    paths:
+      - /var/log/nginx/*.log
+      - /var/log/nginx/*/*.log
+
+    tags: ["access", "error"]
+
+#    multiline.pattern: '(\d{1,2}:\d{2}:\d{2}.\d{3})\[http.*'
+#    multiline.negate: true
+#    multiline.match: after
+
+    fields:
+      app_id: "nginx"
+
+  - type: log
+
+    # Change to true to enable this input configuration.
+    enabled: true
+
+    # Paths that should be crawled and fetched. Glob based paths.
+    paths:
+      - /var/log/kafka/*.log
+
+    tags: ["topic_trace"]
+
+#    multiline.pattern: '(\d{1,2}:\d{2}:\d{2}.\d{3})\[http.*'
+#    multiline.negate: true
+#    multiline.match: after
+
+    fields:
+      app_id: "kafka"
+
+  - type: log
+
+    # Change to true to enable this input configuration.
+    enabled: true
+
+    # Paths that should be crawled and fetched. Glob based paths.
+    paths:
+      - /var/log/was/*/*.log
+
+    tags: ["user"]
+
+    multiline.pattern: '(\d{1,2}:\d{2}:\d{2}.\d{3})\[http.*'
+    multiline.negate: true
+    multiline.match: after
+
+    fields:
+      app_id: "was"
+
+# ============================== Filebeat modules ==============================
+
+filebeat.config.modules:
+  # Glob pattern for configuration loading
+  path: ${path.config}/modules.d/*.yml
+
+  # Set to true to enable config reloading
+  reload.enabled: true
+
+  # Period on which files under path should be checked for changes
+  #reload.period: 10s
+
+  # ======================= Elasticsearch template setting =======================
+
+  # setup.template.settings:
+  # index.number_of_shards: 1
+
+  # setup.kibana:
+  # In case you specify and additional path, the scheme is required: http://localhost:5601/path
+  # host: "0.0.0.0:5601"
+
+  # Kibana Space ID
+  # ID of the Kibana Space into which the dashboards should be loaded. By default,
+  # the Default Space will be used.
+  #space.id:
+output.logstash:
+  # The Logstash hosts
+  hosts: ["0.0.0.0:5044"]
+
+  # Optional SSL. By default is off.
+  # List of root certificates for HTTPS server verifications
+  #ssl.certificate_authorities: ["/etc/pki/root/ca.pem"]
+
+  # Certificate for SSL client authentication
+  #ssl.certificate: "/etc/pki/client/cert.pem"
+
+  # Client Certificate Key
+  #ssl.key: "/etc/pki/client/cert.key"
+  # index: "%{[reason.log_type]}-%{[agent.version]}-%{+yyyyyyy.MM.dd}"
+
+
+# ================================= Processors =================================
+processors:
+  - add_host_metadata:
+      when.not.contains.tags: forwarded
+  - add_cloud_metadata: ~
+  - add_docker_metadata: ~
+  - add_kubernetes_metadata: ~
+
