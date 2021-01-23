@@ -26,3 +26,31 @@ services:
       - 5044:5044  # beat
       - 5000:5000  # logback, fluent, other ...
       - 9600:9600  # default ports
+    networks:
+      - elastic
+
+  filebeat:
+    container_name: filebeat
+    build:
+      context: filebeat/
+      args:
+        ELK_VERSION: $ELK_VERSION
+    env_file:
+      - .env
+    environment:
+      USER: root
+    volumes:
+      - /var/log/nginx:/var/log/nginx
+      - /var/log/app:/var/log/app
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - elastic
+    depends_on:
+      - logstash
+
+networks:
+  elastic:
+    driver: bridge
+    internal: true
+    external: true

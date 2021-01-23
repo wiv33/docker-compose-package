@@ -1,4 +1,4 @@
-version: '2.2'
+version: '3.7'
 services:
   es01:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
@@ -16,7 +16,7 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - data01:/usr/share/elasticsearch/data
+      - /var/log/elastic/data01:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
     networks:
@@ -38,7 +38,7 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - data02:/usr/share/elasticsearch/data
+      - /var/log/elastic/data02:/usr/share/elasticsearch/data
     ports:
       - 9201:9201
     networks:
@@ -60,7 +60,7 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - data03:/usr/share/elasticsearch/data
+      - /var/log/elastic/data03:/usr/share/elasticsearch/data
     ports:
       - 9202:9202
     networks:
@@ -88,3 +88,5 @@ volumes:
 networks:
   elastic:
     driver: bridge
+    external: true
+    internal: true

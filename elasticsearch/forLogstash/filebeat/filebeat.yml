@@ -1,0 +1,77 @@
+filebeat.inputs:
+  - type: log
+
+    # Change to true to enable this input configuration.
+    enabled: true
+
+    # Paths that should be crawled and fetched. Glob based paths.
+    paths:
+      - /var/log/nginx/*.log
+      - /var/log/nginx/*/*.log
+
+    tags: ["access", "error"]
+
+    #    multiline.pattern: '(\d{1,2}:\d{2}:\d{2}.\d{3})\[http.*'
+    #    multiline.negate: true
+    #    multiline.match: after
+
+    fields:
+      app_id: "nginx"
+
+  - type: log
+
+    # Change to true to enable this input configuration.
+    enabled: true
+
+    # Paths that should be crawled and fetched. Glob based paths.
+    paths:
+      - /var/log/kafka/*.log
+
+    tags: ["topic_trace"]
+
+    #    multiline.pattern: '(\d{1,2}:\d{2}:\d{2}.\d{3})\[http.*'
+    #    multiline.negate: true
+    #    multiline.match: after
+
+    fields:
+      app_id: "kafka"
+
+  - type: log
+
+    # Change to true to enable this input configuration.
+    enabled: true
+
+    # Paths that should be crawled and fetched. Glob based paths.
+    paths:
+      - /var/log/app/*.log
+
+    tags: ["stock", "info"]
+
+#    multiline.pattern: '(\d{1,2}:\d{2}:\d{2}.\d{3})\[http.*'
+#    multiline.negate: true
+#    multiline.match: after
+
+    fields:
+      app_id: "apps"
+
+# ============================== Filebeat modules ==============================
+
+filebeat.config.modules:
+  # Glob pattern for configuration loading
+  path: ${path.config}/modules.d/*.yml
+
+  # Set to true to enable config reloading
+  reload.enabled: true
+
+output.logstash:
+  # The Logstash hosts
+  hosts: ["logstash:5044"]
+
+# ================================= Processors =================================
+processors:
+  - add_host_metadata:
+      when.not.contains.tags: forwarded
+  - add_cloud_metadata: ~
+  - add_docker_metadata: ~
+  - add_kubernetes_metadata: ~
+
