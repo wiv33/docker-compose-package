@@ -43,7 +43,7 @@ services:
       - /var/log/nginx:/var/log/nginx
       - /var/log/app:/var/log/app
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - //var/run/docker.sock:/var/run/docker.sock:ro
     networks:
       - elastic
     depends_on:
@@ -52,5 +52,4 @@ services:
 networks:
   elastic:
     driver: bridge
-    internal: true
     external: true

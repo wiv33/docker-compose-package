@@ -1,0 +1,34 @@
+filebeat.config:
+  modules:
+    path: ${path.config}/modules.d/*.yml
+    reload.enabled: false
+
+filebeat.autodiscover:
+  providers:
+    - type: docker
+      hints.enabled: true
+
+processors:
+  - add_cloud_metadata: ~
+  - add_host_metadata:
+      netinfo.enabled: true
+
+output.logstash:
+  hosts: ['0.0.0.0:5044']
+
+#output.elasticsearch:
+#  hosts: '${ELASTICSEARCH_HOSTS:elasticsearch:9200}'
+#  username: '${ELASTICSEARCH_USERNAME:}'
+#  password: '${ELASTICSEARCH_PASSWORD:}'
+
+---
+#output.kafka:
+#  hosts: [ "0.0.0.0:9092" ]
+#  topic: "topicname"
+#  topics:
+#    - topic: "error"
+#      when.contains:
+#        message: "ERR"
+#    - topic: "access"
+#      when.contains:
+#        message: "\"GET .*\" 200" #Apache access logs use a GET request in combination with some HTTP data and a 200 code afterward. Backslashes in YAML indicate the following character should be read as text, not syntax
